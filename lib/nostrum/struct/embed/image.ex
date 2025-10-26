@@ -3,6 +3,7 @@ defmodule Nostrum.Struct.Embed.Image do
   Struct representing a Discord embed image.
   """
 
+  require Nostrum.Putter
   alias Nostrum.Util
   alias Jason.{Encode, Encoder}
 
@@ -41,6 +42,23 @@ defmodule Nostrum.Struct.Embed.Image do
           height: height,
           width: width
         }
+
+  @doc since: "NEXTVERSION"
+  Nostrum.Putter.defputter(:url,
+    doc_value: "https://discord.com/assets/af92e60c16b7019f34a467383b31490a.svg"
+  )
+
+  @doc false
+  @doc since: "NEXTVERSION"
+  Nostrum.Putter.defputter(:proxy_url, custom_doc: true)
+
+  @doc false
+  @doc since: "NEXTVERSION"
+  Nostrum.Putter.defputter(:height, custom_doc: true)
+
+  @doc false
+  @doc since: "NEXTVERSION"
+  Nostrum.Putter.defputter(:width, custom_doc: true)
 
   @doc false
   def to_struct(map) do

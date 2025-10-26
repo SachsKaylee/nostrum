@@ -76,6 +76,7 @@ defmodule Nostrum.Struct.Embed do
   be ignored.
   """
 
+  require Nostrum.Putter
   alias Nostrum.Struct.Embed.{Author, Field, Footer, Image, Provider, Thumbnail, Video}
   alias Nostrum.Util
   alias Jason.{Encode, Encoder}
@@ -202,91 +203,18 @@ defmodule Nostrum.Struct.Embed do
     end
   end
 
-  @doc ~S"""
-  Puts the given `value` under `:title` in `embed`.
-
-  ## Examples
-
-  ```elixir
-  iex> embed = %Nostrum.Struct.Embed{}
-  ...> Nostrum.Struct.Embed.put_title(embed, "nostrum")
-  %Nostrum.Struct.Embed{title: "nostrum"}
-  ```
-  """
-  @spec put_title(t, title) :: t
-  def put_title(%__MODULE__{} = embed, value) do
-    %__MODULE__{embed | title: value}
-  end
-
   @doc false
-  @spec put_type(t, type) :: t
-  def put_type(%__MODULE__{} = embed, value) do
-    %__MODULE__{embed | type: value}
-  end
+  Nostrum.Putter.defputter(:type, custom_doc: true)
 
-  @doc ~S"""
-  Puts the given `value` under `:description` in `embed`.
+  Nostrum.Putter.defputter(:title, doc_value: "nostrum")
 
-  ## Examples
+  Nostrum.Putter.defputter(:description, doc_value: "An elixir library for the discord API.")
 
-  ```elixir
-  iex> embed = %Nostrum.Struct.Embed{}
-  ...> Nostrum.Struct.Embed.put_description(embed, "An elixir library for the discord API.")
-  %Nostrum.Struct.Embed{description: "An elixir library for the discord API."}
-  ```
-  """
-  @spec put_description(t, description) :: t
-  def put_description(%__MODULE__{} = embed, value) do
-    %__MODULE__{embed | description: value}
-  end
+  Nostrum.Putter.defputter(:url, doc_value: "https://github.com/Kraigie/nostrum")
 
-  @doc ~S"""
-  Puts the given `value` under `:url` in `embed`.
+  Nostrum.Putter.defputter(:timestamp, doc_value: "2018-04-21T17:33:51.893000Z")
 
-  ## Examples
-
-  ```elixir
-  iex> embed = %Nostrum.Struct.Embed{}
-  ...> Nostrum.Struct.Embed.put_url(embed, "https://github.com/Kraigie/nostrum")
-  %Nostrum.Struct.Embed{url: "https://github.com/Kraigie/nostrum"}
-  ```
-  """
-  @spec put_url(t, url) :: t
-  def put_url(%__MODULE__{} = embed, value) do
-    %__MODULE__{embed | url: value}
-  end
-
-  @doc ~S"""
-  Puts the given `value` under `:timestamp` in `embed`.
-
-  ## Examples
-
-  ```elixir
-  iex> embed = %Nostrum.Struct.Embed{}
-  ...> Nostrum.Struct.Embed.put_timestamp(embed, "2018-04-21T17:33:51.893000Z")
-  %Nostrum.Struct.Embed{timestamp: "2018-04-21T17:33:51.893000Z"}
-  ```
-  """
-  @spec put_timestamp(t, timestamp) :: t
-  def put_timestamp(%__MODULE__{} = embed, value) do
-    %__MODULE__{embed | timestamp: value}
-  end
-
-  @doc ~S"""
-  Puts the given `value` under `:color` in `embed`.
-
-  ## Examples
-
-  ```elixir
-  iex> embed = %Nostrum.Struct.Embed{}
-  ...> Nostrum.Struct.Embed.put_color(embed, 431948)
-  %Nostrum.Struct.Embed{color: 431948}
-  ```
-  """
-  @spec put_color(t, color) :: t
-  def put_color(%__MODULE__{} = embed, value) do
-    %__MODULE__{embed | color: value}
-  end
+  Nostrum.Putter.defputter(:color, doc_value: 0x6974C)
 
   @doc ~S"""
   Puts a `Nostrum.Struct.Embed.Footer` under `:footer` in `embed`.
@@ -399,6 +327,9 @@ defmodule Nostrum.Struct.Embed do
 
     %__MODULE__{embed | provider: provider}
   end
+
+  @doc since: "NEXTVERSION"
+  Nostrum.Putter.defputter(:author)
 
   @doc ~S"""
   Puts a `Nostrum.Struct.Embed.Author` under `:author` in `embed`.

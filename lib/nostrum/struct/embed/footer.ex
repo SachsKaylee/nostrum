@@ -3,6 +3,7 @@ defmodule Nostrum.Struct.Embed.Footer do
   Struct representing a Discord embed footer.
   """
 
+  require Nostrum.Putter
   alias Nostrum.Util
   alias Jason.{Encode, Encoder}
 
@@ -36,6 +37,18 @@ defmodule Nostrum.Struct.Embed.Footer do
           icon_url: icon_url,
           proxy_icon_url: proxy_icon_url
         }
+
+  @doc since: "NEXTVERSION"
+  Nostrum.Putter.defputter(:text, doc_value: "nostrum footer")
+
+  @doc since: "NEXTVERSION"
+  Nostrum.Putter.defputter(:icon_url,
+    doc_value: "https://discord.com/assets/53ef346458017da2062aca5c7955946b.svg"
+  )
+
+  @doc false
+  @doc since: "NEXTVERSION"
+  Nostrum.Putter.defputter(:proxy_icon_url, custom_doc: true)
 
   @doc false
   def to_struct(map) do

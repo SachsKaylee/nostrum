@@ -3,6 +3,7 @@ defmodule Nostrum.Struct.Embed.Provider do
   Struct representing a Discord embed provider.
   """
 
+  require Nostrum.Putter
   alias Nostrum.Util
   alias Jason.{Encode, Encoder}
 
@@ -31,6 +32,14 @@ defmodule Nostrum.Struct.Embed.Provider do
           name: name,
           url: url
         }
+
+  @doc false
+  @doc since: "NEXTVERSION"
+  Nostrum.Putter.defputter(:name, custom_doc: true)
+
+  @doc false
+  @doc since: "NEXTVERSION"
+  Nostrum.Putter.defputter(:url, custom_doc: true)
 
   @doc false
   def to_struct(map) do
