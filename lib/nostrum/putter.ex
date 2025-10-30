@@ -4,7 +4,7 @@ defmodule Nostrum.Putter do
 
   defmacro __using__(_opts) do
     quote do
-      use Nostrum.Putter
+      require Nostrum.Putter
       import Nostrum.Putter, only: [defputter: 2]
     end
   end
