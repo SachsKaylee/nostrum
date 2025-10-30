@@ -3,7 +3,7 @@ defmodule Nostrum.Struct.Embed.Author do
   Struct representing a Discord embed author.
   """
 
-  require Nostrum.Putter
+  use Nostrum.Putter
   alias Nostrum.Util
   alias Jason.{Encode, Encoder}
 
@@ -44,19 +44,28 @@ defmodule Nostrum.Struct.Embed.Author do
         }
 
   @doc since: "NEXTVERSION"
-  Nostrum.Putter.defputter(:name, doc_value: "skippi")
+  @doc_example "skippi"
+  defputter name(name) do
+    name
+  end
 
   @doc since: "NEXTVERSION"
-  Nostrum.Putter.defputter(:url, doc_value: "https://github.com/skippi")
+  @doc_example "https://github.com/skippi"
+  defputter url(url) do
+    url
+  end
 
   @doc since: "NEXTVERSION"
-  Nostrum.Putter.defputter(:icon_url,
-    doc_value: "https://avatars.githubusercontent.com/u/16873158"
-  )
+  @doc_example "https://avatars.githubusercontent.com/u/16873158"
+  defputter icon_url(icon_url) do
+    icon_url
+  end
 
   @doc false
   @doc since: "NEXTVERSION"
-  Nostrum.Putter.defputter(:proxy_icon_url, custom_doc: true)
+  defputter proxy_icon_url(proxy_icon_url) do
+    proxy_icon_url
+  end
 
   @doc false
   def to_struct(map) do

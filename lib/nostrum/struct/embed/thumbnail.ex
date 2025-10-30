@@ -3,7 +3,7 @@ defmodule Nostrum.Struct.Embed.Thumbnail do
   Struct representing a Discord embed thumbnail.
   """
 
-  require Nostrum.Putter
+  use Nostrum.Putter
   alias Nostrum.Util
   alias Jason.{Encode, Encoder}
 
@@ -44,21 +44,28 @@ defmodule Nostrum.Struct.Embed.Thumbnail do
         }
 
   @doc since: "NEXTVERSION"
-  Nostrum.Putter.defputter(:url,
-    doc_value: "https://discord.com/assets/af92e60c16b7019f34a467383b31490a.svg"
-  )
+  @doc_example "https://discord.com/assets/af92e60c16b7019f34a467383b31490a.svg"
+  defputter url(url) do
+    url
+  end
 
   @doc false
   @doc since: "NEXTVERSION"
-  Nostrum.Putter.defputter(:proxy_url, custom_doc: true)
+  defputter proxy_url(proxy_url) do
+    proxy_url
+  end
 
   @doc false
   @doc since: "NEXTVERSION"
-  Nostrum.Putter.defputter(:height, custom_doc: true)
+  defputter height(height) do
+    height
+  end
 
   @doc false
   @doc since: "NEXTVERSION"
-  Nostrum.Putter.defputter(:width, custom_doc: true)
+  defputter width(width) do
+    width
+  end
 
   @doc false
   def to_struct(map) do

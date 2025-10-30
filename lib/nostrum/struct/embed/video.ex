@@ -3,7 +3,7 @@ defmodule Nostrum.Struct.Embed.Video do
   Struct representing a Discord embed video.
   """
 
-  require Nostrum.Putter
+  use Nostrum.Putter
   alias Nostrum.Util
   alias Jason.{Encode, Encoder}
 
@@ -40,15 +40,21 @@ defmodule Nostrum.Struct.Embed.Video do
 
   @doc false
   @doc since: "NEXTVERSION"
-  Nostrum.Putter.defputter(:url, custom_doc: true)
+  defputter url(url) do
+    url
+  end
 
   @doc false
   @doc since: "NEXTVERSION"
-  Nostrum.Putter.defputter(:height, custom_doc: true)
+  defputter height(height) do
+    height
+  end
 
   @doc false
   @doc since: "NEXTVERSION"
-  Nostrum.Putter.defputter(:width, custom_doc: true)
+  defputter width(width) do
+    width
+  end
 
   @doc false
   def to_struct(map) do

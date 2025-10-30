@@ -3,7 +3,7 @@ defmodule Nostrum.Struct.Embed.Field do
   Struct representing a Discord embed field.
   """
 
-  require Nostrum.Putter
+  use Nostrum.Putter
   alias Nostrum.Util
   alias Jason.{Encode, Encoder}
 
@@ -39,13 +39,22 @@ defmodule Nostrum.Struct.Embed.Field do
         }
 
   @doc since: "NEXTVERSION"
-  Nostrum.Putter.defputter(:name, doc_value: "First User")
+  @doc_example "First User"
+  defputter name(name) do
+    name
+  end
 
   @doc since: "NEXTVERSION"
-  Nostrum.Putter.defputter(:value, doc_value: "b1nzy")
+  @doc_example "b1nzy"
+  defputter value(value) do
+    value
+  end
 
   @doc since: "NEXTVERSION"
-  Nostrum.Putter.defputter(:inline, doc_value: true)
+  @doc_example true
+  defputter inline(inline) do
+    inline
+  end
 
   @doc false
   def to_struct(map) do

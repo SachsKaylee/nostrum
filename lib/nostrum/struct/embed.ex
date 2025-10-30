@@ -76,7 +76,7 @@ defmodule Nostrum.Struct.Embed do
   be ignored.
   """
 
-  require Nostrum.Putter
+  use Nostrum.Putter
   alias Nostrum.Struct.Embed.{Author, Field, Footer, Image, Provider, Thumbnail, Video}
   alias Nostrum.Util
   alias Jason.{Encode, Encoder}
@@ -204,17 +204,50 @@ defmodule Nostrum.Struct.Embed do
   end
 
   @doc false
-  Nostrum.Putter.defputter(:type, custom_doc: true)
+  defputter type(type) do
+    type
+  end
 
-  Nostrum.Putter.defputter(:title, doc_value: "nostrum")
+  @doc_example "nostrum"
+  defputter title(title) do
+    title
+  end
 
-  Nostrum.Putter.defputter(:description, doc_value: "An elixir library for the discord API.")
+  @doc_example "An elixir library for the discord API."
+  defputter description(description) do
+    description
+  end
 
-  Nostrum.Putter.defputter(:url, doc_value: "https://github.com/Kraigie/nostrum")
+  @doc_example "https://github.com/Kraigie/nostrum"
+  defputter url(url) do
+    url
+  end
 
-  Nostrum.Putter.defputter(:timestamp, doc_value: "2018-04-21T17:33:51.893000Z")
+  @doc_example "2018-04-21T17:33:51.893000Z"
+  defputter timestamp(timestamp) do
+    timestamp
+  end
 
-  Nostrum.Putter.defputter(:color, doc_value: 0x6974C)
+  @doc_example 0x6974C
+  defputter color(color) do
+    color
+  end
+
+  @doc_example values: [
+                 text: "demo text",
+                 icon_url: "https://bild.de/a.png"
+               ],
+               result: %Footer{
+                 text: "demo text",
+                 icon_url: "https://bild.de/a.png"
+               }
+  @spec put_footer(t(), Footer.text(), Footer.icon_url()) :: t()
+  defputter footer(text, icon_url) do
+    %Footer{
+      text: text,
+      icon_url: icon_url
+    }
+  end
 
   @doc ~S"""
   Puts a `Nostrum.Struct.Embed.Footer` under `:footer` in `embed`.
@@ -241,8 +274,8 @@ defmodule Nostrum.Struct.Embed do
   }
   ```
   """
-  @spec put_footer(t, Footer.text(), Footer.icon_url()) :: t
-  def put_footer(%__MODULE__{} = embed, text, icon_url \\ nil) do
+  @spec put_footerold(t, Footer.text(), Footer.icon_url()) :: t
+  def put_footerold(%__MODULE__{} = embed, text, icon_url \\ nil) do
     footer = %Footer{
       text: text,
       icon_url: icon_url
@@ -329,34 +362,27 @@ defmodule Nostrum.Struct.Embed do
   end
 
   @doc since: "NEXTVERSION"
-  Nostrum.Putter.defputter(:author)
+  defputter author(author) do
+    author
+  end
 
-  @doc ~S"""
-  Puts a `Nostrum.Struct.Embed.Author` under `:author` in `embed`.
-
-  ## Examples
-
-  ```elixir
-  iex> embed = %Nostrum.Struct.Embed{}
-  ...> Nostrum.Struct.Embed.put_author(embed, "skippi", "https://github.com/skippi", nil)
-  %Nostrum.Struct.Embed{
-    author: %Nostrum.Struct.Embed.Author{
-      name: "skippi",
-      url: "https://github.com/skippi",
-      icon_url: nil
-    }
-  }
-  ```
-  """
+  @doc_example values: [
+                 name: "skippi",
+                 url: "https://github.com/skippi",
+                 icon_url: nil
+               ],
+               result: %Nostrum.Struct.Embed.Author{
+                 name: "skippi",
+                 url: "https://github.com/skippi",
+                 icon_url: nil
+               }
   @spec put_author(t, Author.name(), Author.url(), Author.icon_url()) :: t
-  def put_author(%__MODULE__{} = embed, name, url, icon_url) do
-    author = %Author{
+  defputter author(name, url, icon_url) do
+    %Author{
       name: name,
       url: url,
       icon_url: icon_url
     }
-
-    %__MODULE__{embed | author: author}
   end
 
   @doc ~S"""
