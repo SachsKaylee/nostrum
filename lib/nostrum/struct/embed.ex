@@ -295,6 +295,31 @@ defmodule Nostrum.Struct.Embed do
 
   ```elixir
   iex> embed = %Nostrum.Struct.Embed{}
+  ...> Nostrum.Struct.Embed.put_footer(embed, %Nostrum.Struct.Embed.Footer{text: "Discord API", icon_url: nil})
+  %Nostrum.Struct.Embed{
+    footer: %Nostrum.Struct.Embed.Footer{
+      text: "Discord API",
+      icon_url: nil
+    }
+  }
+  ```
+  """
+  @spec put_footer(t, footer()) :: t
+  def put_footer(%__MODULE__{} = embed, nil) do
+    %__MODULE__{embed | footer: nil}
+  end
+
+  def put_footer(%__MODULE__{} = embed, %Footer{} = footer) do
+    %__MODULE__{embed | footer: footer}
+  end
+
+  @doc ~S"""
+  Puts the values of a `Nostrum.Struct.Embed.Footer` under `:footer` in `embed`.
+
+  ## Examples
+
+  ```elixir
+  iex> embed = %Nostrum.Struct.Embed{}
   ...> Nostrum.Struct.Embed.put_footer(embed, "Discord API", nil)
   %Nostrum.Struct.Embed{
     footer: %Nostrum.Struct.Embed.Footer{
@@ -338,9 +363,13 @@ defmodule Nostrum.Struct.Embed do
   }
   ```
   """
-  @spec put_image(t, Image.url()) :: t
+  @spec put_image(t, image() | Image.url()) :: t
   def put_image(%__MODULE__{} = embed, nil) do
     %__MODULE__{embed | image: nil}
+  end
+
+  def put_image(%__MODULE__{} = embed, %Image{} = image) do
+    %__MODULE__{embed | image: image}
   end
 
   def put_image(%__MODULE__{} = embed, url) do
@@ -366,9 +395,13 @@ defmodule Nostrum.Struct.Embed do
   }
   ```
   """
-  @spec put_thumbnail(t, Thumbnail.url()) :: t
+  @spec put_thumbnail(t, thumbnail() | Thumbnail.url()) :: t
   def put_thumbnail(%__MODULE__{} = embed, nil) do
     %__MODULE__{embed | thumbnail: nil}
+  end
+
+  def put_thumbnail(%__MODULE__{} = embed, %Thumbnail{} = thumbnail) do
+    %__MODULE__{embed | thumbnail: thumbnail}
   end
 
   def put_thumbnail(%__MODULE__{} = embed, url) do
@@ -402,6 +435,32 @@ defmodule Nostrum.Struct.Embed do
 
   @doc ~S"""
   Puts a `Nostrum.Struct.Embed.Author` under `:author` in `embed`.
+
+  ## Examples
+
+  ```elixir
+  iex> embed = %Nostrum.Struct.Embed{}
+  ...> Nostrum.Struct.Embed.put_author(embed, %Nostrum.Struct.Embed.Author{name: "skippi", url: "https://github.com/skippi", icon_url: nil})
+  %Nostrum.Struct.Embed{
+    author: %Nostrum.Struct.Embed.Author{
+      name: "skippi",
+      url: "https://github.com/skippi",
+      icon_url: nil
+    }
+  }
+  ```
+  """
+  @spec put_author(t, author()) :: t
+  def put_author(%__MODULE__{} = embed, nil) do
+    %__MODULE__{embed | author: nil}
+  end
+
+  def put_author(%__MODULE__{} = embed, %Author{} = author) do
+    %__MODULE__{embed | author: author}
+  end
+
+  @doc ~S"""
+  Puts the values of an `Nostrum.Struct.Embed.Author` under `:author` in `embed`.
 
   ## Examples
 

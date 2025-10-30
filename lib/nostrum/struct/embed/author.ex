@@ -48,4 +48,28 @@ defmodule Nostrum.Struct.Embed.Author do
 
     struct(__MODULE__, new)
   end
+
+  @doc ~S"""
+  Puts the given `name` under `:name` in `author`.
+  """
+  @spec put_name(t, name()) :: t
+  def put_name(%__MODULE__{} = author, name) do
+    %__MODULE__{author | name: name}
+  end
+
+  @doc ~S"""
+  Puts the given `url` under `:url` in `author`.
+  """
+  @spec put_url(t, url()) :: t
+  def put_url(%__MODULE__{} = author, url) do
+    %__MODULE__{author | url: url}
+  end
+
+  @doc ~S"""
+  Puts the given `icon_url` under `:icon_url` in `author`.
+  """
+  @spec put_icon_url(t, icon_url()) :: t
+  def put_icon_url(%__MODULE__{} = author, icon_url) do
+    %__MODULE__{author | icon_url: icon_url}
+  end
 end

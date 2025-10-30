@@ -43,4 +43,12 @@ defmodule Nostrum.Struct.Embed.Video do
 
     struct(__MODULE__, new)
   end
+
+  @doc ~S"""
+  Puts the given `url` under `:url` in `video`.
+  """
+  @spec put_url(t, url()) :: t
+  def put_url(%__MODULE__{} = video, url) do
+    %__MODULE__{video | url: url}
+  end
 end

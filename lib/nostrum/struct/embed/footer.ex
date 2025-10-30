@@ -43,4 +43,20 @@ defmodule Nostrum.Struct.Embed.Footer do
 
     struct(__MODULE__, new)
   end
+
+  @doc ~S"""
+  Puts the given `text` under `:text` in `footer`.
+  """
+  @spec put_text(t, text()) :: t
+  def put_text(%__MODULE__{} = footer, text) do
+    %__MODULE__{footer | text: text}
+  end
+
+  @doc ~S"""
+  Puts the given `icon_url` under `:icon_url` in `footer`.
+  """
+  @spec put_icon_url(t, icon_url()) :: t
+  def put_icon_url(%__MODULE__{} = footer, icon_url) do
+    %__MODULE__{footer | icon_url: icon_url}
+  end
 end
