@@ -233,15 +233,17 @@ defmodule Nostrum.Struct.Embed do
     color
   end
 
-  @doc_example values: [
-                 text: "demo text",
-                 icon_url: "https://bild.de/a.png"
-               ],
-               result: %Footer{
-                 text: "demo text",
-                 icon_url: "https://bild.de/a.png"
-               }
-  @spec put_footer(t(), Footer.text(), Footer.icon_url()) :: t()
+  @doc_example %PutterExample{
+    values: [
+      text: "demo text",
+      icon_url: "https://bild.de/a.png"
+    ],
+    result: %Footer{
+      text: "demo text",
+      icon_url: "https://bild.de/a.png"
+    }
+  }
+  @spec put_footer(t, Footer.text(), Footer.icon_url()) :: t
   defputter footer(text, icon_url) do
     %Footer{
       text: text,
@@ -249,116 +251,65 @@ defmodule Nostrum.Struct.Embed do
     }
   end
 
-  @doc ~S"""
-  Puts a `Nostrum.Struct.Embed.Footer` under `:footer` in `embed`.
-
-  ## Examples
-
-  ```elixir
-  iex> embed = %Nostrum.Struct.Embed{}
-  ...> Nostrum.Struct.Embed.put_footer(embed, "Discord API", nil)
-  %Nostrum.Struct.Embed{
-    footer: %Nostrum.Struct.Embed.Footer{
-      text: "Discord API",
-      icon_url: nil
-    }
-  }
-
-  iex> embed = %Nostrum.Struct.Embed{}
-  ...> Nostrum.Struct.Embed.put_footer(embed, "nostrum footer", "https://discord.com/assets/53ef346458017da2062aca5c7955946b.svg")
-  %Nostrum.Struct.Embed{
-    footer: %Nostrum.Struct.Embed.Footer{
-      text: "nostrum footer",
-      icon_url: "https://discord.com/assets/53ef346458017da2062aca5c7955946b.svg"
-    }
-  }
-  ```
-  """
-  @spec put_footerold(t, Footer.text(), Footer.icon_url()) :: t
-  def put_footerold(%__MODULE__{} = embed, text, icon_url \\ nil) do
-    footer = %Footer{
-      text: text,
-      icon_url: icon_url
-    }
-
-    %__MODULE__{embed | footer: footer}
-  end
-
-  @doc ~S"""
-  Puts a `Nostrum.Struct.Embed.Image` under `:image` in `embed`.
-
-  ## Examples
-
-  ```elixir
-  iex> embed = %Nostrum.Struct.Embed{}
-  ...> Nostrum.Struct.Embed.put_image(embed, "https://discord.com/assets/af92e60c16b7019f34a467383b31490a.svg")
-  %Nostrum.Struct.Embed{
-    image: %Nostrum.Struct.Embed.Image{
+  @doc_example %PutterExample{
+    values: [
+      url: "https://discord.com/assets/af92e60c16b7019f34a467383b31490a.svg"
+    ],
+    result: %Nostrum.Struct.Embed.Image{
       url: "https://discord.com/assets/af92e60c16b7019f34a467383b31490a.svg"
     }
   }
-  ```
-  """
+  @doc_example nil
   @spec put_image(t, Image.url()) :: t
-  def put_image(%__MODULE__{} = embed, nil) do
-    %__MODULE__{embed | image: nil}
+  defputter image(url) do
+    case url do
+      nil ->
+        nil
+
+      _ ->
+        %Image{
+          url: url
+        }
+    end
   end
 
-  def put_image(%__MODULE__{} = embed, url) do
-    image = %Image{
-      url: url
-    }
-
-    %__MODULE__{embed | image: image}
-  end
-
-  @doc ~S"""
-  Puts a `Nostrum.Struct.Embed.Thumbnail` under `:thumbnail` in `embed`.
-
-  ## Examples
-
-  ```elixir
-  iex> embed = %Nostrum.Struct.Embed{}
-  ...> Nostrum.Struct.Embed.put_thumbnail(embed, "https://discord.com/assets/af92e60c16b7019f34a467383b31490a.svg")
-  %Nostrum.Struct.Embed{
-    thumbnail: %Nostrum.Struct.Embed.Thumbnail{
+  @doc_example %PutterExample{
+    values: [
+      url: "https://discord.com/assets/af92e60c16b7019f34a467383b31490a.svg"
+    ],
+    result: %Nostrum.Struct.Embed.Thumbnail{
       url: "https://discord.com/assets/af92e60c16b7019f34a467383b31490a.svg"
     }
   }
-  ```
-  """
+  @doc_example nil
   @spec put_thumbnail(t, Thumbnail.url()) :: t
-  def put_thumbnail(%__MODULE__{} = embed, nil) do
-    %__MODULE__{embed | thumbnail: nil}
-  end
+  defputter thumbnail(url) do
+    case url do
+      nil ->
+        nil
 
-  def put_thumbnail(%__MODULE__{} = embed, url) do
-    thumbnail = %Thumbnail{
-      url: url
-    }
-
-    %__MODULE__{embed | thumbnail: thumbnail}
+      _ ->
+        %Thumbnail{
+          url: url
+        }
+    end
   end
 
   @doc false
   @spec put_video(t, Video.url()) :: t
-  def put_video(%__MODULE__{} = embed, url) do
-    video = %Video{
+  defputter video(url) do
+    %Video{
       url: url
     }
-
-    %__MODULE__{embed | video: video}
   end
 
   @doc false
   @spec put_provider(t, Provider.name(), Provider.url()) :: t
-  def put_provider(%__MODULE__{} = embed, name, url) do
-    provider = %Provider{
+  defputter provider(name, url) do
+    %Provider{
       name: name,
       url: url
     }
-
-    %__MODULE__{embed | provider: provider}
   end
 
   @doc since: "NEXTVERSION"
@@ -366,16 +317,32 @@ defmodule Nostrum.Struct.Embed do
     author
   end
 
-  @doc_example values: [
-                 name: "skippi",
-                 url: "https://github.com/skippi",
-                 icon_url: nil
-               ],
-               result: %Nostrum.Struct.Embed.Author{
-                 name: "skippi",
-                 url: "https://github.com/skippi",
-                 icon_url: nil
-               }
+  @doc_example %PutterExample{
+    values: [
+      name: "skippi",
+      url: "https://github.com/skippi",
+      icon_url: nil
+    ],
+    result: %Nostrum.Struct.Embed.Author{
+      name: "skippi",
+      url: "https://github.com/skippi",
+      icon_url: nil
+    }
+  }
+
+  @doc_example %PutterExample{
+    values: [
+      name: "skippi2",
+      url: "https://github.com/skippi2",
+      icon_url: nil
+    ],
+    result: %Nostrum.Struct.Embed.Author{
+      name: "skippi2",
+      url: "https://github.com/skippi2",
+      icon_url: nil
+    }
+  }
+
   @spec put_author(t, Author.name(), Author.url(), Author.icon_url()) :: t
   defputter author(name, url, icon_url) do
     %Author{
