@@ -48,4 +48,12 @@ defmodule Nostrum.Struct.Embed.Thumbnail do
 
     struct(__MODULE__, new)
   end
+
+  @doc ~S"""
+  Puts the given `url` under `:url` in `thumbnail`.
+  """
+  @spec put_url(t, url()) :: t
+  def put_url(%__MODULE__{} = thumbnail, url) do
+    %__MODULE__{thumbnail | url: url}
+  end
 end

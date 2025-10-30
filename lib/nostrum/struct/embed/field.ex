@@ -43,4 +43,28 @@ defmodule Nostrum.Struct.Embed.Field do
 
     struct(__MODULE__, new)
   end
+
+  @doc ~S"""
+  Puts the given `name` under `:name` in `field`.
+  """
+  @spec put_name(t, name()) :: t
+  def put_name(%__MODULE__{} = field, name) do
+    %__MODULE__{field | name: name}
+  end
+
+  @doc ~S"""
+  Puts the given `value` under `:value` in `field`.
+  """
+  @spec put_value(t, value()) :: t
+  def put_value(%__MODULE__{} = field, value) do
+    %__MODULE__{field | value: value}
+  end
+
+  @doc ~S"""
+  Puts the given `inline` under `:inline` in `field`.
+  """
+  @spec put_inline(t, inline()) :: t
+  def put_inline(%__MODULE__{} = field, inline) do
+    %__MODULE__{field | inline: inline}
+  end
 end
